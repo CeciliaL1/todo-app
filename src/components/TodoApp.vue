@@ -5,10 +5,11 @@ import Todos from '../components/Todos.vue'
 import AddTodo from '../components/AddTodo.vue'
 
 
-const todos = ref<Todo[]>([]);
+const todos = ref<Todo[]>([new Todo('test')]);
 
 const addTodo = (text: string) => {
-todos.value.push(new Todo(text))
+    if ( text === '') return
+    todos.value.push(new Todo(text))
 };
 
 const toggleTodo = (id:number) => {
@@ -26,6 +27,17 @@ const removeTodo = (id: number) => {
 </script>
 
 <template>
+<div>
 <AddTodo @add-todo="addTodo"></AddTodo>
-<Todos :todos="todos" @toggle-todo="toggleTodo" @remove-todo="removeTodo"/>
+</div>
+<div><Todos :todos="todos" @toggle-todo="toggleTodo" @remove-todo="removeTodo"/></div>
 </template>
+
+
+<style scoped>
+div{
+    margin-top: 20px;
+
+}
+
+</style>
