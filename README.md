@@ -28,7 +28,4 @@ npm install
 
 ```
 vite
-vue.js
-
-
 ```
