@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Todo } from '@/models/Todo';
-import { defineProps } from 'vue';
+import { defineProps, defineEmits } from 'vue';
 
 
 type TodoPresentationProps = {
@@ -9,13 +9,18 @@ type TodoPresentationProps = {
 
 defineProps<TodoPresentationProps>();
 
+const emit = defineEmits<{
+    (e: "toggleTodo", id: number):void;
+    (e: 'removeTodo', id: number):void;
+}>();
+
 </script>
 
 <template>
     <div>
         <h1 :class="todo.done ? 'done' : ''">{{ todo.text }}</h1>
-        <button>Ändra</button>
-        <button>Ta bort</button>
+        <button @click="$emit('toggleTodo', todo.id)">Ändra</button>
+        <button @click="$emit('removeTodo', todo.id)">Ta bort</button>
     </div>
 </template>
 
